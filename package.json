@@ -1,6 +1,6 @@
 {
   "name": "yorin-js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Yorin Analytics JavaScript SDK for browser environments",
   "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
