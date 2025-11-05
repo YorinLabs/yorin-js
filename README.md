@@ -5,7 +5,8 @@ A powerful, lightweight analytics SDK for tracking user interactions and events 
 ## Features
 
 - **Event Tracking**: Track pageviews, custom events, and user interactions
-- **User Identification**: Associate events with identified users and groups
+- **Analytics-First**: All events stored for analytics (no database modifications)
+- **User Identification**: Associate events with users and groups for analytics tracking
 - **Automatic Retries**: Built-in exponential backoff for failed requests
 - **Event Batching**: Optimize performance by batching multiple events
 - **Session Management**: Automatic session tracking with configurable timeout
@@ -13,6 +14,28 @@ A powerful, lightweight analytics SDK for tracking user interactions and events 
 - **Browser Support**: Works with all modern browsers and frameworks
 - **SSR Compatible**: Server-side rendering support for Next.js, Nuxt, etc.
 - **Privacy-First**: GDPR-compliant with configurable data collection
+
+## Security Model
+
+**This is a client-side SDK that uses publishable keys (`pk_*`) for analytics tracking only.**
+
+### What This SDK Does:
+- ✅ **Analytics Tracking**: All events stored in ClickHouse for analytics and insights
+- ✅ **Session Management**: Track user sessions and interactions
+- ✅ **Event Attribution**: Associate events with users and groups for analytics
+- ✅ **Behavioral Analysis**: Track pageviews, clicks, and custom events
+
+### What This SDK Does NOT Do:
+- ❌ **Contact Creation**: Does not create or modify contact records in your database
+- ❌ **User Management**: Does not create user accounts or profiles
+- ❌ **Group Management**: Does not create or modify organization/team records
+- ❌ **Data Modifications**: No write access to operational databases
+
+### For Full CRUD Operations:
+Use the server-side SDK (yorin-nodejs) with secret keys (`sk_*`) for:
+- Creating/updating contacts and groups
+- Managing user profiles and organizations
+- Database operations and user management
 
 ## Installation
 
@@ -50,7 +73,7 @@ await yorin.track('button_clicked', {
   page: '/homepage'
 });
 
-// Identify users
+// Identify users (analytics tracking only)
 await yorin.identify('user_123', {
   $email: 'user@example.com',
   $first_name: 'John',
@@ -74,6 +97,11 @@ interface YorinConfig {
   enableBatching?: boolean;     // Enable event batching (default: true)
 }
 ```
+
+**Important**:
+- Only use **publishable keys** (`pk_*`) with this client-side SDK
+- Never use secret keys (`sk_*`) in frontend applications
+- All events are for analytics tracking only
 
 ## API Reference
 
@@ -109,7 +137,7 @@ await yorin.track('add_to_cart', {
 ```
 
 #### `identify(userId, properties?)`
-Identify authenticated users and set their properties. Only authenticated users with a userId become contacts.
+Associate analytics events with authenticated users. **Analytics tracking only** - does not create contacts in your database.
 
 ```typescript
 await yorin.identify('user_123', {
@@ -120,8 +148,10 @@ await yorin.identify('user_123', {
 });
 ```
 
+**Note**: This method tracks user identification events for analytics purposes. To create actual contact records in your database, use the server-side SDK with `addOrUpdateContact` events.
+
 #### `groupIdentify(groupId, properties?)`
-Associate users with groups (companies, organizations, etc.).
+Associate analytics events with groups/organizations. **Analytics tracking only** - does not create groups in your database.
 
 ```typescript
 await yorin.groupIdentify('company_456', {
@@ -131,6 +161,8 @@ await yorin.groupIdentify('company_456', {
   plan: 'enterprise'
 });
 ```
+
+**Note**: This method tracks group identification events for analytics purposes. To create actual group records in your database, use the server-side SDK with `addOrUpdateGroup` events.
 
 #### `flush()`
 Manually flush all queued events immediately.
