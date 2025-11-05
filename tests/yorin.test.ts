@@ -10,7 +10,7 @@ describe("Yorin SDK", () => {
     fetchMock = global.fetch as jest.Mock;
     mockConfig = {
       apiKey: "pk_test_123456789",
-      apiUrl: "https://api.yorin.io",
+      apiUrl: "https://us.yorin.io",
       debug: false,
       enableBatching: false, // Disable batching for easier testing
     };
@@ -51,7 +51,7 @@ describe("Yorin SDK", () => {
     it("should use default values for optional config", () => {
       const minimalConfig = {
         apiKey: "pk_test_123",
-        apiUrl: "https://api.yorin.io",
+        apiUrl: "https://us.yorin.io",
       };
       const minimalYorin = new Yorin(minimalConfig);
       expect(minimalYorin).toBeInstanceOf(Yorin);
@@ -78,7 +78,7 @@ describe("Yorin SDK", () => {
     it("should initialize successfully", async () => {
       await yorin.init();
       expect(fetchMock).toHaveBeenCalledWith(
-        "https://api.yorin.io/v1/settings",
+        "https://us.yorin.io/v1/settings",
         expect.objectContaining({
           method: "GET",
           headers: expect.objectContaining({
@@ -114,7 +114,7 @@ describe("Yorin SDK", () => {
       await yorin.pageview();
 
       expect(fetchMock).toHaveBeenCalledWith(
-        "https://api.yorin.io/v1/events",
+        "https://us.yorin.io/v1/events",
         expect.objectContaining({
           method: "POST",
           headers: expect.objectContaining({

@@ -34,7 +34,7 @@ import { Yorin } from 'yorin-js';
 // Initialize the SDK
 const yorin = new Yorin({
   apiKey: 'pk_your_publishable_key',
-  apiUrl: 'https://api.yorin.io',
+  apiUrl: 'https://us.yorin.io',
   debug: true // Enable debug logging in development
 });
 
@@ -261,7 +261,7 @@ Events are automatically batched for better performance. Configure batching beha
 ```javascript
 const yorin = new Yorin({
   apiKey: 'pk_...',
-  apiUrl: 'https://api.yorin.io',
+  apiUrl: 'https://us.yorin.io',
   enableBatching: true,  // Enable batching
   batchSize: 20,         // Send when 20 events are queued
   flushInterval: 1000    // Or send every 1 second
@@ -287,7 +287,7 @@ Enable auto-tracking in config:
 ```javascript
 const yorin = new Yorin({
   apiKey: 'pk_...',
-  apiUrl: 'https://api.yorin.io',
+  apiUrl: 'https://us.yorin.io',
   autoTrackClicks: true
 });
 ```
@@ -312,7 +312,7 @@ Enable detailed logging for development:
 ```javascript
 const yorin = new Yorin({
   apiKey: 'pk_...',
-  apiUrl: 'https://api.yorin.io',
+  apiUrl: 'https://us.yorin.io',
   debug: true // Logs all SDK operations
 });
 ```
