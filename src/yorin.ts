@@ -251,8 +251,9 @@ export class Yorin {
 
   /**
    * Identify a user and associate properties with them
-   * @param userId - Optional unique identifier for the user
-   * @param properties - User properties to store
+   * Creates or updates a contact record for authenticated users only
+   * @param userId - Required unique identifier for the user
+   * @param properties - User properties to store (email is optional)
    * @returns Promise that resolves when the identification is sent
    * @example
    * await yorin.identify('user_123', {
@@ -262,7 +263,7 @@ export class Yorin {
    * });
    */
   public async identify(
-    userId?: string,
+    userId: string,
     properties?: IdentifyProperties,
   ): Promise<void> {
     // Process properties to handle legacy support and ensure proper $-prefixed format
@@ -284,10 +285,8 @@ export class Yorin {
       });
     }
 
-    // Add user_id as $user_id if provided
-    if (userId) {
-      processedProperties['$user_id'] = userId;
-    }
+    // Add user_id as $user_id (required for contact creation)
+    processedProperties['$user_id'] = userId;
 
     const event: YorinEvent = {
       type: EVENT_TYPES.IDENTIFY,

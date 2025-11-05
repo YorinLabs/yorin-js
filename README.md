@@ -108,8 +108,8 @@ await yorin.track('add_to_cart', {
 });
 ```
 
-#### `identify(userId?, properties?)`
-Identify users and set their properties.
+#### `identify(userId, properties?)`
+Identify authenticated users and set their properties. Only authenticated users with a userId become contacts.
 
 ```typescript
 await yorin.identify('user_123', {
