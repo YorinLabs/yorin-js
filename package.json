@@ -1,5 +1,5 @@
 {
-  "name": "@yorin.io/yorin-js",
+  "name": "yorin-js",
   "version": "0.1.2",
   "description": "Yorin Analytics JavaScript SDK for browser environments",
   "main": "dist/index.cjs",
@@ -44,7 +44,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YorinLabs/yorin-js.git"
+    "url": "git+https://github.com/YorinLabs/yorin-js.git"
   },
   "bugs": {
     "url": "https://github.com/YorinLabs/yorin-js/issues"

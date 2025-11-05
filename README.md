@@ -17,19 +17,19 @@ A powerful, lightweight analytics SDK for tracking user interactions and events 
 ## Installation
 
 ```bash
-npm install @yorin.io/yorin-js
+npm install yorin-js
 ```
 
 or
 
 ```bash
-yarn add @yorin.io/yorin-js
+yarn add yorin-js
 ```
 
 ## Quick Start
 
 ```javascript
-import { Yorin } from '@yorin.io/yorin-js';
+import { Yorin } from 'yorin-js';
 
 // Initialize the SDK
 const yorin = new Yorin({
@@ -179,7 +179,7 @@ Create an instrumentation file for client-side initialization:
 
 ```javascript
 // instrumentation-client.js
-import { Yorin } from '@yorin.io/yorin-js';
+import { Yorin } from 'yorin-js';
 
 const yorin = new Yorin({
   apiKey: process.env.NEXT_PUBLIC_YORIN_PUBLISHABLE_KEY,
@@ -219,7 +219,7 @@ Initialize in your main entry file:
 
 ```javascript
 // main.js or index.js
-import { Yorin } from '@yorin.io/yorin-js';
+import { Yorin } from 'yorin-js';
 
 const yorin = new Yorin({
   apiKey: import.meta.env.VITE_YORIN_PUBLISHABLE_KEY, // Vite
@@ -239,7 +239,7 @@ Create a plugin:
 
 ```javascript
 // plugins/yorin.js
-import { Yorin } from '@yorin.io/yorin-js';
+import { Yorin } from 'yorin-js';
 
 export default {
   install(app, options) {
@@ -322,7 +322,7 @@ const yorin = new Yorin({
 The SDK includes comprehensive TypeScript definitions:
 
 ```typescript
-import { Yorin, YorinConfig, TrackEventProperties } from '@yorin.io/yorin-js';
+import { Yorin, YorinConfig, TrackEventProperties } from 'yorin-js';
 
 const config: YorinConfig = {
   apiKey: 'pk_...',
