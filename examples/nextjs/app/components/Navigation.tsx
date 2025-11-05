@@ -20,6 +20,7 @@ export default function Navigation() {
     { href: "/products", label: "Products" },
     { href: "/about", label: "About" },
     { href: "/dashboard", label: "Dashboard" },
+    { href: "/server-demo", label: "Server Demo" },
   ];
 
   return (
