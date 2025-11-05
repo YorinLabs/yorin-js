@@ -1,17 +1,15 @@
-// Branded types for better type safety
 export type SessionId = string & { readonly brand: unique symbol };
 export type AnonymousId = string & { readonly brand: unique symbol };
 export type PublishableKey = string & { readonly brand: unique symbol };
 
-// Event types as const for exhaustive checking
 export const EVENT_TYPES = {
-  PAGEVIEW: 'pageview',
-  CUSTOM: 'custom_events',
-  IDENTIFY: 'identify',
-  GROUP_IDENTIFY: 'groupIdentify',
+  PAGEVIEW: "pageview",
+  CUSTOM: "custom_events",
+  IDENTIFY: "identify",
+  GROUP_IDENTIFY: "groupIdentify",
 } as const;
 
-export type EventType = typeof EVENT_TYPES[keyof typeof EVENT_TYPES];
+export type EventType = (typeof EVENT_TYPES)[keyof typeof EVENT_TYPES];
 
 export interface YorinConfig {
   apiKey: string;
@@ -46,7 +44,6 @@ export interface TrackEventProperties {
 }
 
 export interface IdentifyProperties {
-  // Standard properties that map to database columns
   $user_id?: string;
   $email?: string;
   $first_name?: string;
@@ -56,17 +53,13 @@ export interface IdentifyProperties {
   $company?: string;
   $job_title?: string;
   $avatar_url?: string;
-
-  // Legacy support
   email?: string;
   name?: string;
 
-  // Custom properties (non-$-prefixed)
   [key: string]: any;
 }
 
 export interface GroupIdentifyProperties {
-  // Standard properties that map to database columns
   $name?: string;
   $description?: string;
   $company?: string;
@@ -76,10 +69,8 @@ export interface GroupIdentifyProperties {
   $email?: string;
   $phone?: string;
 
-  // Legacy support
   name?: string;
 
-  // Custom properties (non-$-prefixed)
   [key: string]: any;
 }
 
