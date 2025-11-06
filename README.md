@@ -432,7 +432,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Support
 
-- Documentation: [https://docs.yorin.io](https://docs.yorin.io)
+- Documentation: [https://yorin.io/docs](https://yorin.io/docs)
 - Issues: [GitHub Issues](https://github.com/YorinLabs/yorin-js/issues)
 - Email: support@yorin.io
 

@@ -34,17 +34,23 @@ interface TrackRequestBody {
     external_subscription_id?: string;
     plan_id: string;
     plan_name?: string;
-    status: 'active' | 'cancelled' | 'past_due' | 'trialing' | 'paused';
+    status: 'trialing' | 'active' | 'canceled' | 'incomplete' | 'incomplete_expired' | 'past_due' | 'unpaid' | 'paused';
     subscriber_type: 'contact' | 'group';
     subscriber_id?: string;
     amount?: number;
     currency?: string;
-    billing_cycle?: 'monthly' | 'yearly' | 'quarterly' | 'weekly';
+    billing_cycle?: 'monthly' | 'yearly' | 'quarterly' | 'weekly' | 'one_time' | 'custom';
     started_at?: string;
     trial_ends_at?: string;
     current_period_start?: string;
     current_period_end?: string;
     cancelled_at?: string;
+    ends_at?: string;
+    description?: string;
+    setup_fee?: number;
+    billing_interval?: number;
+    features?: string[];
+    notes?: string;
     provider?: string;
     [key: string]: unknown;
   };
@@ -133,9 +139,9 @@ export async function POST(request: NextRequest) {
         break;
 
       case 'subscription':
-        if (!subscriptionProperties?.plan_id || !subscriptionProperties?.status) {
+        if (!subscriptionProperties?.plan_id || !subscriptionProperties?.status || !subscriptionProperties?.subscriber_type) {
           return NextResponse.json({
-            error: 'plan_id and status are required for subscription events'
+            error: 'plan_id, status, and subscriber_type are required for subscription events'
           }, { status: 400 });
         }
         await yorin.subscription(subscriptionProperties, {
